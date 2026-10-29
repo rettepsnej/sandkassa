@@ -1,7 +1,7 @@
 import { put, list, get, del } from '@vercel/blob';
 import { Readable } from 'node:stream';
 import { createHmac, createHash, timingSafeEqual } from 'node:crypto';
-const choices=['Bløtkokt','Hardkokt','Speilegg','Eggerøre','Uten egg'];
+const choices=['Bløtkokt','Smilende','Hardkokt','Speilegg','Eggerøre','Uten egg'];
 const prefix='breakfast/';
 const digest=value=>createHash('sha256').update(String(value)).digest();
 const equal=(a,b)=>timingSafeEqual(digest(a),digest(b));
