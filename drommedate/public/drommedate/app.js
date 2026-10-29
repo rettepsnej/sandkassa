@@ -1,5 +1,6 @@
 const form=document.getElementById('breakfast-form'),message=document.getElementById('form-message');
-let submissionId=crypto.randomUUID();
+const makeId=()=>globalThis.crypto?.randomUUID?.()||'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const n=Math.floor(Math.random()*16);return(c==='x'?n:(n&3)|8).toString(16);});
+let submissionId=makeId();
 form.addEventListener('submit',async event=>{
  event.preventDefault();if(!form.reportValidity())return;
  const button=form.querySelector('button[type=submit]');button.disabled=true;button.querySelector('span').textContent='Vi noterer ønskene dine …';message.textContent='';
@@ -11,4 +12,4 @@ form.addEventListener('submit',async event=>{
  }catch(error){message.textContent=error.message||'Vi fikk ikke kontakt. Sjekk nettet og prøv igjen.';}
  finally{button.disabled=false;button.querySelector('span').textContent='Det er en date!';}
 });
-document.getElementById('another-guest').addEventListener('click',()=>{form.reset();submissionId=crypto.randomUUID();form.hidden=false;document.getElementById('confirmation').hidden=true;document.getElementById('guest-name').focus();});
+document.getElementById('another-guest').addEventListener('click',()=>{form.reset();submissionId=makeId();form.hidden=false;document.getElementById('confirmation').hidden=true;document.getElementById('guest-name').focus();});
