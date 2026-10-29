@@ -36,7 +36,7 @@ export default async function handler(req,res){
    if(range&&!/^bytes=\d*-\d*$/.test(range))return res.status(416).end();
    const result=await get(path,{access:'private',...(range?{headers:{Range:range}}:{})});
    if(!result||!result.stream)return res.status(404).end();
-   res.setHeader('Cache-Control','public, max-age=86400');
+   res.setHeader('Cache-Control','private, no-store');
    res.setHeader('Content-Type',asset==='audio'?'audio/mpeg':'image/png');
    for(const key of ['content-length','content-range','accept-ranges','etag']){const value=result.headers.get(key);if(value)res.setHeader(key,value);}
    res.status(result.headers.has('content-range')?206:200);
