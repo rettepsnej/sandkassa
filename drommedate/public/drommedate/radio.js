@@ -1,10 +1,8 @@
 (()=>{
- const audio=document.getElementById('breakfast-audio'),play=document.getElementById('radio-play'),pause=document.getElementById('radio-pause'),status=document.getElementById('radio-status'),player=document.querySelector('.radio-player');
+ const audio=document.getElementById('breakfast-audio'),toggle=document.getElementById('radio-toggle');
  audio.volume=.45;
- function sync(){const playing=!audio.paused;play.disabled=playing;pause.disabled=!playing;player.classList.toggle('is-playing',playing);status.textContent=playing?'How D’ya Like Your Eggs…':'Trykk play for litt god morgen.';}
- async function start(){try{await audio.play();sync();}catch{sync();}}
- play.addEventListener('click',start);pause.addEventListener('click',()=>{audio.pause();sync();});
- audio.addEventListener('play',sync);audio.addEventListener('pause',sync);
- audio.addEventListener('error',()=>{status.textContent='Musikken lastes ikke. Prøv igjen.';play.disabled=false;pause.disabled=true;});
- start();
+ function sync(){const playing=!audio.paused;toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',playing?'Sett musikken på pause':'Spill musikk fra radioen');toggle.title=playing?'Pause':'Spill musikk';}
+ async function start(){try{await audio.play();}catch{}sync();}
+ toggle.addEventListener('click',()=>{if(audio.paused)start();else{audio.pause();sync();}});
+ audio.addEventListener('play',sync);audio.addEventListener('pause',sync);audio.addEventListener('error',sync);start();
 })();
