@@ -35,3 +35,7 @@ body{background:#151515}body:after{opacity:.045}header{max-width:1400px;padding-
 @keyframes typing-dot{0%,60%,100%{transform:translateY(0);opacity:.65}30%{transform:translateY(-6px);opacity:1}}
 @media(max-width:700px){.typing-indicator{gap:11px;margin-top:12px}.typing-bubble{width:73px;height:42px;gap:6px}.typing-bubble>span{width:9px;height:9px}.typing-label{font-size:16px}}
 @media(prefers-reduced-motion:reduce){.typing-bubble>span{animation:none;opacity:1}}
+/* Restore the breakfast radio in the top row. */
+header .radio-player{position:relative;top:auto;left:auto;right:auto;width:175px;flex-shrink:0;margin-left:auto;margin-top:-12px;margin-bottom:-12px}
+@media(max-width:700px){header{flex-wrap:wrap}header .radio-player{width:145px;margin-top:8px;margin-bottom:0}.intro{padding-top:10px}}
+@media(max-width:450px){header .radio-player{width:128px}header .brand-anorak img{width:125px}header{gap:12px}.brand-q img{width:40px;height:35px}}
